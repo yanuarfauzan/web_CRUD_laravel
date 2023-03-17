@@ -3,6 +3,7 @@
 use App\Http\Controllers\Blog;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\About;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +24,11 @@ Route::get('/about', [About::class, 'index']);
 
 Route::get('/blog', [Blog::class, 'index']);
 
-Route::resource('/posts', \App\Http\Controllers\PostController::class);
+Route::get('/posts', [PostController::class, 'index']);
+
+Route::get('/post-add', [PostController::class, 'create']);
+
+// request POST
+
+Route::post('/posts', [PostController::class, 'store']);
+

@@ -14,21 +14,24 @@ class PostController extends Controller
         $posts = PostModel::latest()->paginate(5);
         $title = "Yanuar Blog | Posts";
         // render view with posts
-        return view(view: 'posts\posts', data: compact('posts', 'title'), 
+        return view(view: 'posts.posts', data: compact('posts', 'title'), 
     );
     }
+
     public function create(): View {
-        return view ('posts.create');
+        $title = "Yanuar Blog | Form Tambah Post";
+        return view (view: 'posts.create', data: compact('title'));
     }
 
-    public function store(Request $request): RedirectResponse{
-        $this->validate($request, [
-            'image' => 'required|image|mimes:jpeg,jpg,png|max:2048',
-            'title' => 'required|min:5',
-            'content' => 'required|min:10'
-        ]);
-    }
-    public function insert(){
-        
+    public function store(Request $request){
+        // $post = new PostModel;
+        // $post->image = $request->gambar;
+        // $post->title = $request->judul;
+        // $post->content = $request->konten;
+        // $post->save();
+        // return redirect()->route('posts.index')->with(['succes' => 'Data Berhasil Disimpan!']);
+
+        $posts = PostModel::create($request->all());
+        return redirect('/posts')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 }
