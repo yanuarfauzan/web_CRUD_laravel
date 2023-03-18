@@ -34,4 +34,19 @@ class PostController extends Controller
         $posts = PostModel::create($request->all());
         return redirect('/posts')->with(['success' => 'Data Berhasil Disimpan!']);
     }
+    
+    public function edit($id): View {
+        $title = "Yanuar Blog | Edit Data";
+        
+        $postById = PostModel::findOrFail($id);
+        return view(view: 'posts.edit', data: compact('id', 'title', 'postById'));
+        
+    }
+    
+    public function update(Request $request, $id){
+        $post = postModel::findOrFail($id);
+        
+        $post->update($request->all());
+        return redirect('/posts')->with(['success' => 'Data Berhasil Diubah!']);
+    }
 }
