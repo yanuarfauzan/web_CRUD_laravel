@@ -49,4 +49,10 @@ class PostController extends Controller
         $post->update($request->all());
         return redirect('/posts')->with(['success' => 'Data Berhasil Diubah!']);
     }
+
+    public function delete($id){
+        $deletedPost = postModel::findOrFail($id);
+        $deletedPost->delete();
+        return redirect('/posts')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
 }

@@ -6,9 +6,10 @@
             {{ session('success') }}
         </div>
     @endif
-    <div class="card">
+    <div class="card mt-3">
     <div class="card-body">
         <a href="post-add" class="btn btn-md btn-success mb-3">TAMBAH POST</a>    <table class="table">
+        <table class="table">
         <thead>
             <tr>
                 <th scope="col">No</th>
@@ -29,9 +30,14 @@
             <td>{{ $post->title }}</td>
             <td>{{ $post->content }}</td>
             <td>
-                <a href="" class="badge bg-success">detail</a>
-                <a href="post-edit/{{ $post->id }}" class="badge bg-warning">edit</a>
-                <a href="" class="badge bg-danger">hapus</a>
+
+                    <a href="" class="badge bg-success">detail</a>
+                    <a href="post-edit/{{ $post->id }}" class="badge bg-warning">edit</a>
+                    <form action="{{ route('post-del', $post->id) }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="badge bg-danger">hapus</button>
+                    </form>
             </td>
         </tr>
         @empty

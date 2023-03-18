@@ -30,6 +30,7 @@ Route::get('/post-add', [PostController::class, 'create']);
 
 Route::get('/post-edit/{id}', [PostController::class, 'edit']);
 
+Route::delete('/post-del/{id}', [PostController::class, 'delete'])->name('post-del');
 // request POST
 
 Route::post('/posts', [PostController::class, 'store']);
