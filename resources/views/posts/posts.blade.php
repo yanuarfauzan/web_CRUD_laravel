@@ -31,7 +31,7 @@
             <td>{{ $post->content }}</td>
             <td>
 
-                    <a href="" class="badge bg-success">detail</a>
+                    <a href="post-detail/{{ $post->id }}" class="badge bg-success">detail</a>
                     <a href="post-edit/{{ $post->id }}" class="badge bg-warning">edit</a>
                     <form action="{{ route('post-del', $post->id) }}" method="POST">
                         @csrf

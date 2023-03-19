@@ -35,24 +35,24 @@ class PostController extends Controller
         return redirect('/posts')->with(['success' => 'Data Berhasil Disimpan!']);
     }
     
-    public function edit($id): View {
+    public function edit(postModel $postEdit){
         $title = "Yanuar Blog | Edit Data";
-        
-        $postById = PostModel::findOrFail($id);
-        return view(view: 'posts.edit', data: compact('id', 'title', 'postById'));
+        return view(view: 'posts.edit', data: compact('postEdit', 'title'));
         
     }
     
-    public function update(Request $request, $id){
-        $post = postModel::findOrFail($id);
-        
-        $post->update($request->all());
+    public function update(Request $request, postModel $updatedPost){
+        $updatedPost->update($request->all());
         return redirect('/posts')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
-    public function delete($id){
-        $deletedPost = postModel::findOrFail($id);
+    public function delete(postModel $deletedPost){
         $deletedPost->delete();
         return redirect('/posts')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
+
+    public function show(postModel $showingPost){
+        $title = "Yanuar Blog | Detail Post";
+        return view(view: 'posts.detail', data: compact('showingPost', 'title'));
     }
 }

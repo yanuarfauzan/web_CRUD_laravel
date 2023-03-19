@@ -28,14 +28,16 @@ Route::get('/posts', [PostController::class, 'index']);
 
 Route::get('/post-add', [PostController::class, 'create']);
 
-Route::get('/post-edit/{id}', [PostController::class, 'edit']);
+Route::get('/post-edit/{postEdit}', [PostController::class, 'edit']);
 
-Route::delete('/post-del/{id}', [PostController::class, 'delete'])->name('post-del');
+Route::get('/post-detail/{showingPost}', [PostController::class, 'show']);
+
+Route::delete('/post-del/{deletedPost}', [PostController::class, 'delete'])->name('post-del');
 // request POST
 
 Route::post('/posts', [PostController::class, 'store']);
 
 // request PUT
 
-Route::put('/post-do-edit/{id}', [PostController::class, 'update'])->name('post-do-edit.update');
+Route::put('/post-do-edit/{updatedPost}', [PostController::class, 'update'])->name('post-do-edit');
 
