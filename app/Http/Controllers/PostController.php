@@ -6,6 +6,7 @@ use App\Models\PostModel;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use illuminate\Http\RedirectResponse;
 
 class PostController extends Controller
@@ -52,11 +53,24 @@ class PostController extends Controller
     }
     
     public function update(Request $request, postModel $updatedPost){
-        $updatedPost->update($request->all());
+        
+        $image = $request->file('image');
+        $image_extension = $image->extension();
+        $image_name = date('ymdhis') .'.'. $image_extension;
+        $image->move(public_path('image'), $image_name);
+        
+        File::delete(public_path('image'). '/' . $updatedPost->image);
+
+        $updatedPost->update([
+            'image' => $image_name,
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
         return redirect('/posts')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     public function delete(postModel $deletedPost){
+        File::delete(public_path('image'). '/' . $deletedPost->image);
         $deletedPost->delete();
         return redirect('/posts')->with(['success' => 'Data Berhasil Dihapus!']);
     }

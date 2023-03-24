@@ -41,7 +41,7 @@
                     <form action="{{ route('post-del', $post->id) }}" method="POST">
                         @csrf
                         @method('delete')
-                        <button type="submit" class="badge bg-danger">hapus</button>
+                        <button type="submit" class="badge bg-danger badge-borderless">hapus</button>
                     </form>
             </td>
         </tr>

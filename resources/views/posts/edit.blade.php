@@ -3,9 +3,14 @@
 <div class="container">
     <div class="row mt-3">
         <div class="col">
-            <form action="{{ route('post-do-edit', $postEdit->id) }}" method="POST">
+            <form action="{{ route('post-do-edit', $postEdit->id) }}" method="POST" enctype="multipart/form-data">
               @csrf
               @method('PUT')
+              @if($postEdit->image)
+              <div class="mb-3">
+                <img src="{{ url('image'). '/' . $postEdit->image }}" alt="" style="width: 100px;">
+              </div>
+              @endif
                 <div class="mb-3">
                   <label for="gambar" class="form-label">Upload Foto</label>
                   <input type="file" class="form-control" id="gambar" name="image" value="{{ $postEdit->image }}">
