@@ -2,31 +2,36 @@
 @section('container')
 <div class="container">
     @if (session('success'))
-        <div class="alert alert-success mt-3">
-            {{ session('success') }}
-        </div>
+    <div class="alert alert-success mt-3">
+        {{ session('success') }}
+    </div>
     @endif
     <div class="card mt-3">
-    <div class="card-body">
-        <a href="post-add" class="btn btn-md btn-success mb-3">TAMBAH POST</a>    <table class="table">
-        <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Gambar</th>
-                <th scope="col">Judul</th>
-                <th scope="col">Content</th>
-                <th scope="col">Aksi</th>
-            </tr>
-        </thead>
-    <tbody>
-        @php
+        <div class="card-body">
+            <a href="post-add" class="btn btn-md btn-success mb-3">TAMBAH POST</a>    <table class="table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Gambar</th>
+                            <th scope="col">Judul</th>
+                            <th scope="col">Content</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
             $no = 1;
-        @endphp
+            @endphp
         @forelse ($posts as $post)
         <tr>
             <th>{{ $no++ }}</th>
-            <th>{{ $post->image }}</th>
+            <th>
+                @if($post->image)
+                <img src="{{ url('image'. '/' . $post->image) }}" alt="" class="img-thumbnail" style="width: 50%">
+                @endif
+
+            </th>
             <td>{{ $post->title }}</td>
             <td>{{ $post->content }}</td>
             <td>

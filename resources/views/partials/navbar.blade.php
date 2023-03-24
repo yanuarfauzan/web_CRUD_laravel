@@ -1,24 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand" href="#">Yanuar Blog</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: teal;">
+  <div class="container bg-primary d-flex" style="width:100%">
+    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="row d-flex justify-content-md-center">
+          <div class="col bg-dark">
+          </div>
+          <div class="col bg-light"></div>
+          <div class="col bg-success">
+          <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link {{ $title === "Yanuar Blog | Home" ? 'active' : ''}}" href="/">Home</a>
+            <a class="nav-link {{ $title === "Yanuar Blog | Dashboard" ? 'active' : ''}} text-light" href="/posts">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ $title === "Yanuar Blog | About" ? 'active' : ''}}" href="/about">About</a>
+            <a class="nav-link {{ $title === "Yanuar Blog | Home" ? 'active' : ''}} text-light" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ $title === "Yanuar Blog | Blog" ? 'active' : ''}}" href="/blog">Blog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{ $title === "Yanuar Blog | Posts" ? 'active' : ''}}" href="/posts">Posts</a>
+            <a class="nav-link {{ $title === "Yanuar Blog | About" ? 'active' : ''}} text-light" href="/about">About</a>
           </li>
         </ul>
+        </div>
+    </div>
       </div>
     </div>
   </nav>

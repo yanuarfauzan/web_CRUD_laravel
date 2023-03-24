@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use illuminate\Http\RedirectResponse;
 use App\Models\PostModel;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use illuminate\Http\RedirectResponse;
 
 class PostController extends Controller
 {
     public function index(){
         // get posts
-        $posts = PostModel::latest()->paginate(5);
-        $title = "Yanuar Blog | Posts";
+        $posts = PostModel::all();
+        $title = "Yanuar Blog | Dashboard";
         // render view with posts
         return view(view: 'posts.posts', data: compact('posts', 'title'), 
     );
@@ -31,8 +32,17 @@ class PostController extends Controller
         // $post->save();
         // return redirect()->route('posts.index')->with(['succes' => 'Data Berhasil Disimpan!']);
 
-        $posts = PostModel::create($request->all());
-        return redirect('/posts')->with(['success' => 'Data Berhasil Disimpan!']);
+        $image = $request->file('image');
+        $image_extension = $image->extension();
+        $image_name = date('ymdhis') .'.'. $image_extension;
+        $image->move(public_path('image'), $image_name);
+
+        $posts = PostModel::create([
+            'image' => $image_name,
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
+        return redirect('posts')->with(['success' => 'Data Berhasil Disimpan!']);
     }
     
     public function edit(postModel $postEdit){

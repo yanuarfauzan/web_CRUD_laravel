@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row mt-3">
         <div class="col">
-            <form action="posts" method="POST">
+            <form action="posts" method="POST" enctype="multipart/form-data">
               @csrf
                 <div class="mb-3">
                   <label for="gambar" class="form-label">Upload Foto</label>
