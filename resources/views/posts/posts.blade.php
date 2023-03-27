@@ -6,16 +6,16 @@
         {{ session('success') }}
     </div>
     @endif
-    <div class="card mt-3">
+    <div class="card mt-3 shadow-sm p-3 mb-5 bg-body rounded">
         <div class="card-body">
-            <a href="post-add" class="btn btn-md btn-success mb-3">TAMBAH POST</a>    <table class="table">
+            <a href="post-add" class="btn btn-md btn-success btn-rounded mb-3">Tambah Post</a>    
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Gambar</th>
                             <th scope="col">Judul</th>
-                            <th scope="col">Content</th>
+                            <th scope="col">Konten</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -28,21 +28,28 @@
             <th>{{ $no++ }}</th>
             <th>
                 @if($post->image)
-                <img src="{{ url('image'. '/' . $post->image) }}" alt="" class="img-thumbnail" style="width: 50%">
+                <img src="{{ url('image'. '/' . $post->image) }}" alt="" class="img-thumbnail" style="width: 200">
                 @endif
 
             </th>
             <td>{{ $post->title }}</td>
             <td>{{ $post->content }}</td>
             <td>
-
-                    <a href="post-detail/{{ $post->id }}" class="badge bg-success">detail</a>
-                    <a href="post-edit/{{ $post->id }}" class="badge bg-warning">edit</a>
+                    <div class="d-flex flex-column">
+                    <a href="post-detail/{{ $post->id }}" class="btn btn-md bg-primary text-light btn-rounded mb-2">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <a href="post-edit/{{ $post->id }}" class="btn btn-md bg-warning text-light btn-rounded mb-2">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
                     <form action="{{ route('post-del', $post->id) }}" method="POST">
                         @csrf
                         @method('delete')
-                        <button type="submit" class="badge bg-danger badge-borderless">hapus</button>
+                        <button type="submit" class="btn btn-md bg-danger text-light btn-rounded">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
                     </form>
+                    </div>
             </td>
         </tr>
         @empty
