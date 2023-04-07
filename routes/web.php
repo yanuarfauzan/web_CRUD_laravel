@@ -3,8 +3,9 @@
 use App\Http\Controllers\Blog;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\About;
-use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,8 @@ Route::get('/post-add', [PostController::class, 'create']);
 Route::get('/post-edit/{postEdit}', [PostController::class, 'edit']);
 
 Route::get('/post-detail/{showingPost}', [PostController::class, 'show']);
+
+Route::get('/category', [CategoryController::class, 'index']);
 
 Route::delete('/post-del/{deletedPost}', [PostController::class, 'delete'])->name('post-del');
 // request POST

@@ -15,4 +15,9 @@ class PostModel extends Model
         'content',
     ];
 
+    public function Category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
 }

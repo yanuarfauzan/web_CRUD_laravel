@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function index(){
         // get posts
-        $posts = PostModel::all();
+        $posts = PostModel::with('Category')->get();
         $title = "Yanuar Blog | Dashboard";
         // render view with posts
         return view(view: 'posts.posts', data: compact('posts', 'title'), 

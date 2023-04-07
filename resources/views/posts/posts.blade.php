@@ -16,16 +16,14 @@
                             <th scope="col">Gambar</th>
                             <th scope="col">Judul</th>
                             <th scope="col">Konten</th>
+                            <th scope="col">Kategori</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-            $no = 1;
-            @endphp
         @forelse ($posts as $post)
         <tr>
-            <th>{{ $no++ }}</th>
+            <th>{{ $loop->iteration }}</th>
             <th>
                 @if($post->image)
                 <img src="{{ url('image'. '/' . $post->image) }}" alt="" class="img-thumbnail" style="width: 200">
@@ -34,6 +32,7 @@
             </th>
             <td>{{ $post->title }}</td>
             <td>{{ $post->content }}</td>
+            <td>{{ $post->Category['category_name'] }}</td>
             <td>
                     <div class="d-flex flex-column">
                     <a href="post-detail/{{ $post->id }}" class="btn btn-md bg-primary text-light btn-rounded mb-2">
