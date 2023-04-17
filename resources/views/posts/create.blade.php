@@ -2,11 +2,9 @@
 @section('container')
 <div class="container">
   <div class="row">
-    <div class="col-md-4"></div>
     <div class="col-md-4">
       <h3>Form Tambah Postingan</h3>
     </div>
-    <div class="col-md-4"></div>
   </div>
 </div>
 <div class="container">
@@ -23,7 +21,14 @@
                 </div>
                 <div class="mb-3">
                   <label for="judul" class="form-label">Judul Postingan</label>
-                  <input type="text" class="form-control" id="judul" name="title">
+                  <input type="text" class="form-control" id="judul" name="title" value="">
+                </div class="mb-3">
+                <select class="form-control" aria-label="Default select example" name="idCate">
+                  <option selected>Pilih Kategori</option>
+                  @foreach($posts as $post)
+                  <option  value="{{ $post->category_id }}" >{{ $post->Category['category_name'] }}</option>
+                  @endforeach
+                </select>
                 </div>
                 <div class="mb-3">
                   <label for="konten" class="form-label">Konten Postingan</label>
@@ -39,23 +44,23 @@
   </div>
   </div>
 </div>
-@endsection
 <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.config.allowedContent = true;
-            CKEDITOR.replace('konten');
-    </script>
+<script>
+  CKEDITOR.config.allowedContent = true;
+  CKEDITOR.replace('konten');
+  </script>
     <script>
       function previewImage() {
-    const preview = document.getElementById('output');
-    const fileInput = document.getElementById('gambar');
-    const file = fileInput.files[0];
-    if (file) {
-      preview.src = URL.createObjectURL(file);
-      preview.style.display = 'block';
-    } else {
-      preview.src = '';
-      preview.style.display = 'none';
-    }
-  }
-    </script>
+        const preview = document.getElementById('output');
+        const fileInput = document.getElementById('gambar');
+        const file = fileInput.files[0];
+        if (file) {
+          preview.src = URL.createObjectURL(file);
+          preview.style.display = 'block';
+        } else {
+          preview.src = '';
+          preview.style.display = 'none';
+        }
+      }
+      </script>
+@endsection

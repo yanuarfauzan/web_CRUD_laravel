@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\PostModel;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
@@ -13,7 +14,7 @@ class PostController extends Controller
 {
     public function index(){
         // get posts
-        $posts = PostModel::with('Category')->get();
+        $posts = PostModel::with('Category')->paginate(5);
         $title = "Yanuar Blog | Dashboard";
         // render view with posts
         return view(view: 'posts.posts', data: compact('posts', 'title'), 
@@ -22,7 +23,8 @@ class PostController extends Controller
 
     public function create(): View {
         $title = "Yanuar Blog | Form Tambah Post";
-        return view (view: 'posts.create', data: compact('title'));
+        $posts = PostModel::with('Category')->get();
+        return view (view: 'posts.create', data: compact('posts', 'title'));
     }
 
     public function store(Request $request){
@@ -41,14 +43,16 @@ class PostController extends Controller
         $posts = PostModel::create([
             'image' => $image_name,
             'title' => $request->title,
-            'content' => $request->content
+            'content' => $request->content,
+            'category_id' => $request->idCate
         ]);
         return redirect('posts')->with(['success' => 'Data Berhasil Disimpan!']);
     }
     
     public function edit(postModel $postEdit){
         $title = "Yanuar Blog | Edit Data";
-        return view(view: 'posts.edit', data: compact('postEdit', 'title'));
+        $categories = Category::select('id', 'category_name')->distinct()->get();
+        return view(view: 'posts.edit', data: compact('postEdit', 'categories', 'title'));
         
     }
     
@@ -78,5 +82,16 @@ class PostController extends Controller
     public function show(postModel $showingPost){
         $title = "Yanuar Blog | Detail Post";
         return view(view: 'posts.detail', data: compact('showingPost', 'title'));
+    }
+
+    public function deletedPosts(){
+        $title = "Yanuar Blog | Tempat Sampah";
+        $deletedPost = PostModel::onlyTrashed()->get();
+        return view(view: 'posts.post_deleted_list', data: compact('deletedPost', 'title'));
+    }
+
+    public function restore($postRestore){
+        $deletedPost = PostModel::withTrashed()->where('id', $postRestore)->restore();
+        return redirect('/posts')->with(['success' => 'Data Berhasil di Restore!']);
     }
 }

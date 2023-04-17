@@ -1,3 +1,9 @@
+{{-- {{  $postEdit->category_id}}
+
+@foreach($posts as $post)
+
+{{ $post->Category['category_name'] }}
+@endforeach --}}
 @extends('layout.main')
 @section('container')
 <div class="container">
@@ -24,12 +30,19 @@
               @endif
                 <div class="mb-3">
                   <label for="gambar" class="form-label">Upload Foto</label>
-                  <input type="file" class="form-control" id="gambar" name="image" onchange="previewImage()">
+                  <input type="file" class="form-control" id="gambar" name="image" onchange="previewImage()" value="{{ $postEdit->image  }}">
                 </div>
                 <div class="mb-3">
-                  <label for="judul" class="form-label">Judul Postingan</label>
                   <input type="text" class="form-control" id="judul" name="title" value="{{ $postEdit->title }}">
                 </div>
+                <div class="mb-3">
+                <label for="kategori" class="form-label">Kategori</label>
+                <select class="form-control" aria-label="Default select example" name="idCate" id="kategori">
+                @foreach($categories as $category)
+                <option  value="{{ $postEdit->category_id }}" {{ $postEdit->category_id == $category['id'] ? 'selected' : '' }} >{{ $category['category_name'] }}</option>
+                @endforeach
+              </select>
+              </div>
                 <div class="mb-3">
                   <label for="konten" class="form-label">Konten Postingan</label>
                   <textarea type="text" class="form-control" id="konten" name="content">
@@ -55,7 +68,7 @@
     const preview = document.getElementById('output');
     const fileInput = document.getElementById('gambar');
     const file = fileInput.files[0];
-    if (file) {
+    if (file) { 
       preview.src = URL.createObjectURL(file);
     } else {
       preview.src = '';

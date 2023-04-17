@@ -8,7 +8,10 @@
     @endif
     <div class="card mt-3 shadow-sm p-3 mb-5 bg-body rounded">
         <div class="card-body">
-            <a href="post-add" class="btn btn-md btn-success btn-rounded mb-3">Tambah Post</a>    
+            <div class="d-flex justify-content-between">
+                <a href="post-add" class="btn btn-md btn-success btn-rounded mb-3">Tambah Post</a>    
+                <a href="post-deleted" class="btn btn-md btn-info btn-rounded mb-3">Tempat Sampah</a>
+            </div>    
                 <table class="table">
                     <thead>
                         <tr>
@@ -61,5 +64,6 @@
     </table>
         </div>
     </div>
+    
 </div>
 @endsection
