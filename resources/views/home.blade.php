@@ -1,5 +1,5 @@
 @extends('layout.main')
 
 @section('container')
-    <h1>Hello, world! {{ $name; }}</h1>
+    <h1>Hello, {{ Auth::user()->name }}, Role anda: {{ Auth::user()->role->name; }}</h1>
 @endsection

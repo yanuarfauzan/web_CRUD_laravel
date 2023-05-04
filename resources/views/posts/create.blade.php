@@ -1,3 +1,4 @@
+
 @extends('layout.main')
 @section('container')
 <div class="container">
@@ -22,11 +23,13 @@
                 <div class="mb-3">
                   <label for="judul" class="form-label">Judul Postingan</label>
                   <input type="text" class="form-control" id="judul" name="title" value="">
-                </div class="mb-3">
-                <select class="form-control" aria-label="Default select example" name="idCate">
+                </div>
+                <div class="mb-3">
+                  <label for="idCate" class="form-label">Kategori</label>
+                <select class="form-control" aria-label="Default select example" name="idCate" id ="idCate">
                   <option selected>Pilih Kategori</option>
-                  @foreach($posts as $post)
-                  <option  value="{{ $post->category_id }}" >{{ $post->Category['category_name'] }}</option>
+                  @foreach($categories as $category)
+                  <option  value="{{ $category->id }}" >{{ $category->category_name }}</option>
                   @endforeach
                 </select>
                 </div>

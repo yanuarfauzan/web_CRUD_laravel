@@ -30,9 +30,10 @@
               @endif
                 <div class="mb-3">
                   <label for="gambar" class="form-label">Upload Foto</label>
-                  <input type="file" class="form-control" id="gambar" name="image" onchange="previewImage()" value="{{ $postEdit->image  }}">
+                  <input type="file" class="form-control" id="gambar" name="image" onchange="previewImage()" value="{{ $postEdit->image  }}" required>
                 </div>
                 <div class="mb-3">
+                  <label for="judul" class="form-label">Judul Postingan</label>
                   <input type="text" class="form-control" id="judul" name="title" value="{{ $postEdit->title }}">
                 </div>
                 <div class="mb-3">
@@ -57,14 +58,13 @@
         </div>
     </div>
 </div>
-@endsection
 <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+<script>
+  CKEDITOR.config.allowedContent = true;
+  CKEDITOR.replace('konten');
+  </script>
     <script>
-        CKEDITOR.config.allowedContent = true;
-            CKEDITOR.replace('konten');
-    </script>
-    <script>
-       function previewImage() {
+      function previewImage() {
     const preview = document.getElementById('output');
     const fileInput = document.getElementById('gambar');
     const file = fileInput.files[0];
@@ -75,3 +75,4 @@
     }
   }
     </script>
+         @endsection

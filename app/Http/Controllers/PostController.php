@@ -12,19 +12,22 @@ use illuminate\Http\RedirectResponse;
 
 class PostController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        $keyword = $request->keyword;
         // get posts
-        $posts = PostModel::with('Category')->paginate(5);
+        $posts = PostModel::where('title', 'LIKE', '%'. $keyword . '%')->with('Category')->paginate(5);
+        $routeCon = "/posts";
         $title = "Yanuar Blog | Dashboard";
         // render view with posts
-        return view(view: 'posts.posts', data: compact('posts', 'title'), 
+        return view(view: 'posts.posts', data: compact('posts', 'title', 'routeCon')
     );
     }
 
-    public function create(): View {
+    public function create(){
         $title = "Yanuar Blog | Form Tambah Post";
-        $posts = PostModel::with('Category')->get();
-        return view (view: 'posts.create', data: compact('posts', 'title'));
+        $posts = PostModel::get();
+        $categories = Category::select('id', 'category_name')->distinct()->get();
+        return view (view: 'posts.create', data: compact('categories', 'title'));
     }
 
     public function store(Request $request){

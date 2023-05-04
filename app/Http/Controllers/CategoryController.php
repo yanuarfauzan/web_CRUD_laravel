@@ -12,11 +12,13 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->keyword;
+        $routeCon = "/category";
         $title = "Yanuar Blog | Catgeory";
-        $category = Category::with('posts')->paginate(2);
-        return view(view: 'category.category', data: compact('category', 'title'));
+        $category = Category::where('category_name', 'LIKE', '%'. $keyword . '%')->with('posts')->paginate(2);
+        return view(view: 'category.category', data: compact('category', 'title', 'routeCon'));
     }
 
     /**
